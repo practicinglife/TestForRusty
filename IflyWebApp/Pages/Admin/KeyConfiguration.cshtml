@@ -1,0 +1,108 @@
+@page
+@model IflyWebApp.Pages.Admin.KeyConfigurationModel
+@{
+    ViewData["Title"] = "Key Configuration";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Secure Key Configuration</h2>
+            <p class="text-muted">
+                Manage application keys securely. Keys are stored encrypted on disk, 
+                not in web.config files where they could be exposed.
+            </p>
+
+            @if (!string.IsNullOrEmpty(Model.Message))
+            {
+                <div class="alert @(Model.IsError ? "alert-danger" : "alert-success")" role="alert">
+                    @Model.Message
+                </div>
+            }
+
+            <form method="post">
+                <div class="mb-3">
+                    <label for="WebsiteGenerationApiKey" class="form-label">Website Generation API Key</label>
+                    <input type="password" class="form-control" id="WebsiteGenerationApiKey" 
+                           name="KeyConfig.WebsiteGenerationApiKey" 
+                           value="@Model.KeyConfig.WebsiteGenerationApiKey" 
+                           placeholder="Enter your API key for website generation">
+                    <div class="form-text">Required for generating websites</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="DatabaseConnectionString" class="form-label">Database Connection String</label>
+                    <input type="password" class="form-control" id="DatabaseConnectionString" 
+                           name="KeyConfig.DatabaseConnectionString" 
+                           value="@Model.KeyConfig.DatabaseConnectionString" 
+                           placeholder="Enter database connection string">
+                    <div class="form-text">Database connection for storing website data</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="ExternalServiceToken" class="form-label">External Service Token</label>
+                    <input type="password" class="form-control" id="ExternalServiceToken" 
+                           name="KeyConfig.ExternalServiceToken" 
+                           value="@Model.KeyConfig.ExternalServiceToken" 
+                           placeholder="Enter external service authentication token">
+                    <div class="form-text">Optional: Token for external service integration</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="EncryptionKey" class="form-label">Encryption Key</label>
+                    <input type="password" class="form-control" id="EncryptionKey" 
+                           name="KeyConfig.EncryptionKey" 
+                           value="@Model.KeyConfig.EncryptionKey" 
+                           placeholder="Application encryption key">
+                    <div class="form-text">Used for internal data encryption</div>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Save Configuration</button>
+                    <a href="/" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Security Information</h5>
+                </div>
+                <div class="card-body">
+                    <h6>Why not store in web.config?</h6>
+                    <ul class="small">
+                        <li>Config files are often included in source control</li>
+                        <li>Sensitive data could be exposed in logs</li>
+                        <li>Configuration files are readable by many processes</li>
+                        <li>Backup systems might include config files</li>
+                    </ul>
+                    
+                    <h6>Better alternatives:</h6>
+                    <ul class="small">
+                        <li>Environment variables</li>
+                        <li>Encrypted files (like this system)</li>
+                        <li>Azure Key Vault</li>
+                        <li>AWS Secrets Manager</li>
+                        <li>HashiCorp Vault</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5>Configuration Status</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.KeyConfig.IsValid())
+                    {
+                        <span class="badge bg-success">✓ Configuration Valid</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning">⚠ Configuration Incomplete</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

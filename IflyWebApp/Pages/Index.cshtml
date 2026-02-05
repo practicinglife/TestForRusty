@@ -1,0 +1,89 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Ifly - Secure Website Generation";
+}
+
+<div class="container mt-4">
+    <div class="text-center mb-5">
+        <h1 class="display-4">🚀 Ifly Website Generator</h1>
+        <p class="lead">Secure website generation with proper key management</p>
+        <p class="text-muted">
+            Demonstrates how to handle application keys securely without storing them in web.config files
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">🌐 Generate Website</h5>
+                    <p class="card-text">
+                        Create websites using securely stored API keys. No sensitive data exposed in configuration files!
+                    </p>
+                    <a href="/GenerateWebsite" class="btn btn-primary">Generate Website</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">🔐 Key Configuration</h5>
+                    <p class="card-text">
+                        Manage your application keys securely. Keys are encrypted and stored safely on disk.
+                    </p>
+                    <a href="/Admin/KeyConfiguration" class="btn btn-outline-primary">Manage Keys</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>🛡️ Security Problem Solved</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-danger">❌ The Problem (Before)</h6>
+                            <ul class="small">
+                                <li>Storing API keys directly in web.config</li>
+                                <li>GUIDs and sensitive data in configuration files</li>
+                                <li>Keys exposed in source control</li>
+                                <li>Security vulnerabilities and data exposure</li>
+                                <li>Application "craps out" when config is corrupted</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-success">✅ The Solution (Now)</h6>
+                            <ul class="small">
+                                <li>Keys stored encrypted on disk</li>
+                                <li>Environment variable support</li>
+                                <li>Secure key management service</li>
+                                <li>No sensitive data in configuration files</li>
+                                <li>Proper error handling and validation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="alert alert-info" role="alert">
+                <h6>💡 Implementation Notes</h6>
+                <p class="mb-0">
+                    This application demonstrates secure key management practices for web applications. 
+                    Keys are stored in encrypted files outside the web root, with support for environment variables 
+                    and external key stores like Azure Key Vault. This approach prevents the common issue of 
+                    applications failing when sensitive data is stored directly in web.config files.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
