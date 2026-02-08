@@ -6,7 +6,7 @@ import { useCart } from "@/components/CartProvider";
 
 export default function Header(): React.JSX.Element {
   const { totalItems, toggleCart } = useCart();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -54,23 +54,23 @@ export default function Header(): React.JSX.Element {
           </button>
 
           <button
-            onClick={() => setMobileOpen(!mobileOpen)}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-2xl text-gray-300 md:hidden"
             aria-label="Toggle menu"
           >
-            {mobileOpen ? "✕" : "☰"}
+            {isMobileMenuOpen ? "✕" : "☰"}
           </button>
         </div>
       </div>
 
-      {mobileOpen && (
+      {isMobileMenuOpen && (
         <nav className="border-t border-[#374151] bg-[#111111] px-4 py-4 md:hidden">
           <ul className="space-y-3">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="block text-gray-300 transition-colors hover:text-amber-400"
                 >
                   {link.label}
