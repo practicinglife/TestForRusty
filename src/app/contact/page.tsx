@@ -17,6 +17,8 @@ interface FormErrors {
   message?: string;
 }
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function ContactPage(): React.JSX.Element {
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -33,7 +35,7 @@ export default function ContactPage(): React.JSX.Element {
     if (!formData.name.trim()) errs.name = "Name is required";
     if (!formData.email.trim()) {
       errs.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    } else if (!EMAIL_PATTERN.test(formData.email)) {
       errs.email = "Enter a valid email";
     }
     if (!formData.message.trim()) errs.message = "Message is required";
